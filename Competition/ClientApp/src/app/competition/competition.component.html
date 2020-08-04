@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <form>
+    <div class="form-group">   
+      <label for="form1">Codigo Campeonato</label> 
+      <input placeholder="Digite o código do campeonato que você deseja procurar:" class="form-control" id="form1" #newId (keyup.enter)="searchCompetition(newId.value)">
+      <small class="form-text text-muted">Alguns códigos disponíveis: 2018, 2019, 2013</small>
+    </div>
+    <button class="btn btn primary" (click)="searchCompetition(newId.value)">Procurar</button>
+  </form>
+</div>
+<div *ngIf="forecasts && resultArray">
+<h1>{{ forecasts.competition.name }}</h1>
+<table class='table'>
+  
+    <thead>
+      <tr>
+        <th>Ranking</th>
+        <th>Nome</th>
+        <th>Vitórias</th>
+        <th>Empates</th>
+        <th>Derrotas</th>
+        <th>Pontos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="grayLine" *ngFor="let tableData of resultArray">
+        <td>{{ tableData.position }}</td>
+        <td ><img *ngIf="tableData.team.crestUrl != undefined" [src]="tableData.team.crestUrl">{{ tableData.team.name }}</td>
+        <td>{{ tableData.won }}</td>
+        <td>{{ tableData.draw }}</td>
+        <td>{{ tableData.lost }}</td>
+        <td>{{ tableData.points }}</td>    
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+  <div [hidden]="!forecasts" id="dialog" title="Erro">
+    <p>{{ modal }}</p>
+  </div>
+

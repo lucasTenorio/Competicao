@@ -1,0 +1,5 @@
+function openDialog(){
+
+    $( "#dialog" ).dialog();
+    
+}
